@@ -1,42 +1,44 @@
 syntax on
 
 set noerrorbells
-set tabstop=4 softtabstop=4
-" set shiftwidth=4
-" set expandtab					" use space charecter instead tab
-set smartindent					" smart indent when texting
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+" set expandtab			" use space charecter instead tab
+set smartindent			" smart indent when texting
 set nu
-set nowrap						" no wrap the lines
-set smartcase					" case sensitive searching until put capital letter
+set nowrap			" no wrap the lines
+set smartcase			" case sensitive searching until put capital letter
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
-set incsearch					" searching while pressing enter "/<search-str>"
+set incsearch			" searching while pressing enter "/<search-str>"
 
-set nocompatible				" be iMproved, required
-filetype off					" required
+set nocompatible		" be iMproved, required
+filetype off			" required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'			" Plugin manager
-Plugin 'preservim/nerdtree'				" Tree Explorer
-Plugin 'mbbill/undotree'				" Showing undo tree
-Plugin 'ctrlpvim/ctrlp.vim'				" Fuzzy file, buffer, mru, tag, etc finder.
-Plugin 'rking/ag.vim'					" For faster search
-Plugin 'thaerkh/vim-workspace'			" Manage sessions
-Plugin 'airblade/vim-gitgutter'			" shows a git diff in the sign column
-Plugin 'scrooloose/syntastic'			" awesome syntax checker
-Plugin 'morhetz/gruvbox'				" for colorscheme
-Plugin 'vim-airline/vim-airline'		" status bar
-Plugin 'vim-airline/vim-airline-themes'	" status bar themes
+Plugin 'VundleVim/Vundle.vim'		    " Plugin manager
+Plugin 'preservim/nerdtree'		    " Tree Explorer
+Plugin 'mbbill/undotree'		    " Showing undo tree
+Plugin 'ctrlpvim/ctrlp.vim'		    " Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'rking/ag.vim'			    " For faster search
+Plugin 'thaerkh/vim-workspace'		    " Manage sessions
+Plugin 'Valloric/YouCompleteMe'		    " status bar themes
+Plugin 'airblade/vim-gitgutter'		    " shows a git diff in the sign column
+Plugin 'scrooloose/syntastic'		    " awesome syntax checker
+Plugin 'morhetz/gruvbox'		    " for colorscheme
+Plugin 'vim-airline/vim-airline'	    " status bar
+Plugin 'vim-airline/vim-airline-themes'	    " status bar themes
 
 "Plugin 'tpope/vim-fugitive'
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()	    " required
+filetype plugin indent on   " required
 
 " leader key
 let mapleader = " "
@@ -66,8 +68,9 @@ nnoremap <leader>u :UndotreeShow<Enter>
 nmap <leader>gd <C-]>
 nmap <leader>gb <C-t>
 
-" ctrlp find folder or file
-nmap <leader>f :CtrlP<Enter>
+" CtrlP find folder or file from root
+" Press Ctrl+P to search in current directory
+nmap <leader>f :CtrlP :pwd<Enter>
 
 " nerdTree maps
 nnoremap <leader>t :NERDTreeToggle<Enter>
@@ -82,18 +85,18 @@ nnoremap <leader>qq :NERDTreeClose<Enter> :qa<Enter>
 map <leader>st <C-w>T
 nmap <leader>nt :tabnew<Enter>
 nmap <leader>ct :tabclose<Enter>
-nnoremap <Tab> gt		" switch the next tab
-nnoremap <S-Tab> gT		" switch the prev tab
+nnoremap <Tab> gt	" switch the next tab
+nnoremap <S-Tab> gT	" switch the prev tab
 
 " highlight trailing
-nmap <silent> <leader>wse :highlight ExtraWhitespace ctermbg=red guibg=red<Enter>:match ExtraWhitespace /\s\+$/<Enter>
-nmap <silent> <leader>wsd :match<Enter>
+nmap <silent> <leader>WSE :highlight ExtraWhitespace ctermbg=red guibg=red<Enter>:match ExtraWhitespace /\s\+$/<Enter>
+nmap <silent> <leader>WSD :match<Enter>
 
 " session settings
-let g:workspace_persist_undo_history = 1		" enabled = 1 (default), disabled = 0
+let g:workspace_persist_undo_history = 1	" enabled = 1 (default), disabled = 0
 let g:workspace_undodir='.undodir'
 let g:workspace_autosave_always = 1
-" let g:workspace_autosave = 0					" if too much file operation disable it
+" let g:workspace_autosave = 0			" if too much file operation disable it
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_ignore = ['gitcommit']
 
@@ -115,19 +118,31 @@ let g:netrw_winsize=25
 " Use <c-y> to create a new file and its parent directories.
 " Use <c-z> to mark/unmark multiple files and <c-o> to open them.
 
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=30
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:45'
+
 " faster search
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " let g:ctrlp_user_command = 'ag %s -l -U --skip-vcs-ignores --nocolor -g ""'
+
+  " Use ag in CtrlP for listing files.
+  let g:ctrlp_user_command = 'ag %s -l -u --unrestricted --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
 
 " :Ag [options] {pattern} [{directory}]
+" -w		-> whole word with case sensitive
+" -w -i		-> whole word without case sensitive
+" -s		-> case sensitive
+" -Q		-> dont parse pattern as regex
+" -G		-> File search regex
 " :Ag commands after search
 " e    to open file and close the quickfix window
 " o    to open (same as enter)
@@ -166,17 +181,17 @@ colorscheme gruvbox
 let g:airline#extensions#tabline#enabled = 1
 
 " Usefull tips
-" u					-> for Undo
-" Ctrl+R			-> for Redo
-" :e				-> open file
+" u			-> for Undo
+" Ctrl+R		-> for Redo
+" :e			-> open file
 " :mksession		-> create session, give name if you want
 " :mksession!		-> overwrite
 " :source session	-> load session
-" Ctrl+v			-> visual block
-" Shift+v			-> visual line, for tabbing
-" v					-> visual mode
-" Shift+i			-> insert to visual mode
-" Shift+.			-> select tab(>) or shift tab(<)
+" Ctrl+v		-> visual block
+" Shift+v		-> visual line, for tabbing
+" v			-> visual mode
+" Shift+i		-> insert to visual mode
+" Shift+.		-> select tab(>) or shift tab(<)
 
 " Brief help
 " :PluginList       - lists configured plugins
