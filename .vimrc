@@ -6,14 +6,17 @@ set softtabstop=4
 set shiftwidth=4
 " set expandtab			" use space charecter instead tab
 set smartindent			" smart indent when texting
-set nu
+"set nu				" set number
+"set rnu			" set relative number
 set nowrap			" no wrap the lines
 set smartcase			" case sensitive searching until put capital letter
 set noswapfile
 set nobackup
-set undodir=~/.vim/undodir
-set undofile
-set incsearch			" searching while pressing enter "/<search-str>"
+set undodir=~/.vim/undodir	" undo directory
+set undofile			" keep undos
+set incsearch			" search while typing
+set hlsearch			" highlight search string
+set splitright			" start new split on right
 
 set nocompatible		" be iMproved, required
 filetype off			" required
@@ -50,9 +53,17 @@ map <leader>j <C-w>j
 map <leader>k <C-w>k
 map <leader>l <C-w>l
 
+map <F2> :set nu!<CR>
+map <F3> :set rnu!<CR>
+
 " open Vertical and Horizontal split
 nnoremap <silent> <leader>sv <C-w>v
 nnoremap <silent> <leader>sh <C-w>S
+" rotate splits next, prev, exchange
+nnoremap <silent> <leader>sr <C-w>r
+nnoremap <silent> <leader>sR <C-w>R
+nnoremap <silent> <leader>sx <C-w>x
+
 " resize horizontal split
 nnoremap <silent> <leader>+ :resize +5<Enter>
 nnoremap <silent> <leader>- :resize -5<Enter>
@@ -78,11 +89,25 @@ nnoremap <leader>gf :NERDTreeFind<Enter>
 
 " vim-workspace gives error when nerd tree left open in session
 " so close it and quit all for successfully session restore
-nnoremap <leader>qq :NERDTreeClose<Enter> :qa<Enter>
+nnoremap <leader>qa :NERDTreeClose<Enter> :qa!<Enter>
+nnoremap <leader>qq :NERDTreeClose<Enter> :wqa<Enter>
 
-" navigating tabs
+" move page up and down one line keep cursor same in line
+map <C-Up> <C-Y>
+map <C-Down> <C-E>
+imap <C-Up> <ESC> <C-Y>i
+imap <C-Down> <ESC> <C-E>i
+
+" move current line up and down
+map <C-S-Up> :move -2<Enter>
+map <C-S-Down> :move +1<Enter>
+imap <C-S-Up> <ESC> :move -2<Enter>i
+imap <C-S-Down> <ESC> :move +1<Enter>i
+
 " move current split to tab
 map <leader>st <C-w>T
+
+" managing tabs
 nmap <leader>nt :tabnew<Enter>
 nmap <leader>ct :tabclose<Enter>
 nnoremap <Tab> gt	" switch the next tab
@@ -95,8 +120,8 @@ nmap <silent> <leader>WSD :match<Enter>
 " session settings
 let g:workspace_persist_undo_history = 1	" enabled = 1 (default), disabled = 0
 let g:workspace_undodir='.undodir'
-let g:workspace_autosave_always = 1
-" let g:workspace_autosave = 0			" if too much file operation disable it
+"let g:workspace_autosave_always = 1
+let g:workspace_autosave = 0			" if too much file operation disable it
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_ignore = ['gitcommit']
 
@@ -169,9 +194,11 @@ let g:syntastic_check_on_wq = 0
 highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
-nmap ) <Plug>(GitGutterNextHunk)
-nmap ( <Plug>(GitGutterPrevHunk)
+nmap ) :GitGutterNextHunk <Enter>
+nmap ( :GitGutterPrevHunk <Enter>
 let g:gitgutter_map_keys = 0
+" toggle highlighting
+nmap <leader>gh :GitGutterLineHighlightsToggle <Enter>
 
 " colorscheme settings
 set background=dark
@@ -179,6 +206,10 @@ colorscheme gruvbox
 
 " airline - enable for tabline
 let g:airline#extensions#tabline#enabled = 1
+
+" save and load folding texts
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 " Usefull tips
 " u			-> for Undo
@@ -192,6 +223,78 @@ let g:airline#extensions#tabline#enabled = 1
 " v			-> visual mode
 " Shift+i		-> insert to visual mode
 " Shift+.		-> select tab(>) or shift tab(<)
+" cw			-> change word starting cursor pos. in the word
+" ciw			-> change word starting begin of the word
+" ci", ci(, cit		-> change word in "" or () or tag(for html)
+" di{, dip, yi{, yip	-> delete or copy in {} or paragraph
+" g;	g,		-> go to last (prev) change, go to more recent (next) change
+"   SEARCH in file
+" /\cword		-> case insensitive search
+" /\Cword		-> case sensitive search
+" /\<word\>		-> search whole word
+" *			-> search the current whole word
+" :%s/search/replace/g	-> search and replace 
+" :%s/srch/rep/gic	-> search and replace with asking
+"			-> a: all, l: replace and quit, q: quit
+"   MARKS
+" ma			-> mark with 'a' the current cursor position
+" 'a			-> go to line with marked 'a'
+" `a			-> go to cursor position with marked 'a'
+" [' ]'			-> go to prev, next mark line
+" :marks		-> show marks
+" :delmarks		-> delete given marks a-z or A-Z or a,x,y
+" fe			-> find next 'e' in line, usefull in visual mode
+"   BUFFERS
+" :bp :bn :ls :b3	-> buffers, prev, next, list, jump buffer-3
+" :ba :vert ba :3ba	-> bring all buffers, bring up to 3
+" :b <tab>		-> select with name and jump
+" :bd <tab>		-> select with name and delete in buffer list
+" :sp <sv> :vsp <sh>	-> split horizontal(=), split vertical(||), <leader shortcuts>
+"   FOLDS
+" zf zd zc zo zE	-> create, delete, close, open fold, eliminate all in file
+" zC zO			-> when opened nested folds, open and close at once
+" zn zN			-> open all, set all folds as they were before (zn)
+" zj zk [z ]z		-> jump to next-prev fold, go to top-bottom of fold
+" :% foldclose		-> close all fold in file, foldopen for open
+" :set fdm=indent	-> set fold method (manuel,indent,syntax,expr,marker,diff)
+" zr zm			-> open-close one level for all folds
+" zR zM			-> open-close all level for all folds
+" Vi{zf OR zfi{		-> select function body and fold it
+" zfa{			-> includes function line too
+" zf10j			-> fold next 10 line
+" XX,YY fold		-> fold line XX to line YY
+"   REGISTERS
+" :register		-> show registers
+" "ayiw			-> copy inner word to register 'a', a-z available
+" "ap			-> paste register 'a' content
+" ctrl+r a		-> paste register 'a' content in insert mode
+" ctrl+r "		-> paste default register in insert mode
+"   MACROS
+" qm			-> start to recording macro into register 'm', a-z available
+"			-> press q again to stop recording macro when you are done
+" @m			-> run macro, whic in register 'm'
+" 3@m			-> run 3 times
+" :let @b='YOURMACRO'	-> set macro in command mode, ctrl+v before ctrl
+"			-> commands, make sure it colorful
+"   NUMBERS
+" 5ctrl+a ctrl+x	-> increment number by 5, decrement number by 1
+" g ctrl+a		-> usefull when setting array index, select in visual
+"			-> block mode and type this.
+" put =range(10,15)	-> inserts number 10 to 15
+" for i in range(10,15) | put = '192.168.1.'.i | endfor
+"			-> print ip adresses with range
+" :%s/^/\=printf('%-4d', line('.'))
+"			-> inserts line number to file
+"			-> -4d, left aligned, 4d right aligned
+"   VIMDIFF
+" vimdiff file1 file2	-> shows diff 
+" vim -d file1 file2	-> alternative
+" ]c [c			-> jump next-prev diff block changes
+" :diffupdate		-> update changes
+" :diffget		-> get current diff block from other file
+" :diffget //2		-> get current diff block from other file (left in merge)
+" :diffget //3		-> get current diff block from other file (right in merge)
+" :diffput		-> put current diff block to other file
 
 " Brief help
 " :PluginList       - lists configured plugins

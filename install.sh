@@ -18,6 +18,9 @@ sudo apt install ctags -y
 # create undodir
 mkdir ~/.vim/undodir
 
+# create view dir
+mkdir ~/.vim/view
+
 # copy .vimrc file to home directory
 cp .vimrc ~/
 
