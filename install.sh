@@ -13,7 +13,10 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 sudo apt install silversearcher-ag -y
 
 # install ctags
-sudo apt install ctags -y
+# sudo apt install ctags -y
+
+# install cscope
+sudo apt install cscope -y
 
 # create undodir
 mkdir ~/.vim/undodir
@@ -27,4 +30,6 @@ cp .vimrc ~/
 # after install plugins install for c lang completer with following commands
 # cd ~/.vim/bundle/YouCompleteMe/
 # python3 install.py --clangd-completer
+# or give CXX for C++ compiler
+# CXX=/usr/bin/..g++ python3 install.py --clangd-completer
 
