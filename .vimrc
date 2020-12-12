@@ -30,12 +30,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'		    " Plugin manager
 Plugin 'preservim/nerdtree'		    " Tree Explorer
 Plugin 'mbbill/undotree'		    " Showing undo tree
-Plugin 'ctrlpvim/ctrlp.vim'		    " Fuzzy file, buffer, mru, tag, etc finder.
+" Plugin 'ctrlpvim/ctrlp.vim'		    " CtrlP file search.
+Plugin 'junegunn/fzf'			    " Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'junegunn/fzf.vim'		    " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'rking/ag.vim'			    " For faster search
 Plugin 'thaerkh/vim-workspace'		    " Manage sessions
 Plugin 'Valloric/YouCompleteMe'		    " Auto completer
 Plugin 'airblade/vim-gitgutter'		    " shows a git diff in the sign column
-Plugin 'scrooloose/syntastic'		    " awesome syntax checker
+" Plugin 'scrooloose/syntastic'		    " awesome syntax checker
 Plugin 'morhetz/gruvbox'		    " for colorscheme
 Plugin 'vim-airline/vim-airline'	    " status bar
 Plugin 'vim-airline/vim-airline-themes'	    " status bar themes
@@ -52,6 +54,9 @@ let mapleader = " "
 
 " Easy jump for marks
 nnoremap , `
+
+" disable syntax checker
+let g:ycm_show_diagnostics_ui = 0
 
 " toggle line numbers
 map <F2> :set nu!<CR>
@@ -118,7 +123,6 @@ nmap <leader><leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 " buffer shortcuts
 nmap <leader>bp :bp<CR>
 nmap <leader>bn :bn<CR>
-nmap <leader>bs :ls<CR>
 nmap <leader>bd :bd<CR>
 
 " nerdTree maps
@@ -167,45 +171,96 @@ let g:workspace_autosave = 0			" if too much file operation disable it
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_ignore = ['gitcommit']
 
-" CtrlP setting
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|zip|gz|tar|bz2|o|d|out|swp)$',
-  \ }
-let g:netrw_browse_split=2
-let g:netrw_banner=0
-let g:netrw_winsize=25
+" CtrlP setting. Disabled.
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"   \ 'file': '\v\.(exe|so|dll|zip|gz|tar|bz2|o|d|out|swp)$',
+"   \ }
+" let g:netrw_browse_split=2
+" let g:netrw_banner=0
+" let g:netrw_winsize=25
+" 
+" " search in project root
+" map <F3> :CtrlP :pwd<CR>
+" 
+" " <C-p> starts nearest directory which has git folder
+" " :CtrlP <path> for starting search
+" " <C-\> to insert mode (w: currect word..)
+" " Press <c-f> and <c-b> to cycle between modes.
+" " Press <c-d> to switch to filename only search instead of full path.
+" " Press <c-r> to switch to regexp mode.
+" " Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+" " Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+" " Use <c-y> to create a new file and its parent directories.
+" " Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+" 
+" let g:ctrlp_max_files=0
+" let g:ctrlp_max_depth=30
+" let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30'
+" let g:ctrlp_regexp = 1
+" 
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+" 
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag -l -U --skip-vcs-ignores
+" 	      \ --ignore={*.zip,*.tar*,*.out,*.o,*.d,} --nocolor -g "" %s'
+" 
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+" endif
 
-" search in project root
-map <F3> :CtrlP :pwd<CR>
+" FZF settings and shortcuts
+" :Files [PATH]		Files (runs $FZF_DEFAULT_COMMAND if defined)
+" :GFiles [OPTS]	Git files (git ls-files)
+" :GFiles?		Git files (git status)
+" :Buffers		Open buffers
+" :Colors		Color schemes
+" :Ag [PATTERN]		ag search result (ALT-A to select all, ALT-D to deselect all)
+" :Rg [PATTERN]		rg search result (ALT-A to select all, ALT-D to deselect all)
+" :Lines [QUERY]	Lines in loaded buffers
+" :BLines [QUERY]	Lines in the current buffer
+" :Tags [QUERY]		Tags in the project (ctags -R)
+" :BTags [QUERY]	Tags in the current buffer
+" :Marks		Marks
+" :Windows		Windows
+" :Locate PATTERN	locate command output
+" :History		v:oldfiles and open buffers
+" :History:		Command history
+" :History/		Search history
+" :Snippets		Snippets (UltiSnips)
+" :Commits		Git commits (requires fugitive.vim)
+" :BCommits		Git commits for the current buffer
+" :Commands		Commands
+" :Maps			Normal mode mappings
+" :Helptags		Help tags 1
+" :Filetypes		File types
 
-" <C-p> starts nearest directory which has git folder
-" :CtrlP <path> for starting search
-" <C-\> to insert mode (w: currect word..)
-" Press <c-f> and <c-b> to cycle between modes.
-" Press <c-d> to switch to filename only search instead of full path.
-" Press <c-r> to switch to regexp mode.
-" Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
-" Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
-" Use <c-y> to create a new file and its parent directories.
-" Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+" setup rg for fzf
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=30
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30'
-let g:ctrlp_regexp = 1
+" Empty value to disable preview window altogether
+let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-w']
 
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" search in whole project
+map <F3> :Files<CR>
+" give path and search
+nmap <C-p> :Files
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -l -U --skip-vcs-ignores
-	      \ --ignore={*.zip,*.tar*,*.out,*.o,*.d,} --nocolor -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+" buffers list
+nmap <leader>bl :Buffers<CR>
+" search in current buffer
+nmap <leader>bs :BLines<CR>
+" search in all buffer
+nmap <leader>ba :Lines<CR>
 
 " :Ag [options] {pattern} [{directory}]
 " -w		-> whole word with case sensitive
@@ -236,15 +291,15 @@ nmap <leader>fi :Ag -U -w -i <C-R>=expand("<cword>")<CR><CR>
 " find fill yourself with copying current word into command
 nmap <leader>ff :Ag -U -w -s <C-R><C-A>
 
-" syntastic setting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_open = 0
-" :SyntasticCheck for checking
+" syntastic setting. Disabled for now.
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_check_on_open = 0
+"  :SyntasticCheck for checking
 
 " gitgutter settings
 highlight GitGutterAdd guifg=#009900 ctermfg=Green

@@ -1,0 +1,49 @@
+VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Oct 24 2020 16:26:37)
+Included patches: 1-1897
+Modified by jonathon.fernyhough@york.ac.uk
+Compiled by jonathon.fernyhough@york.ac.uk
+Huge version with GTK3 GUI.  Features included (+) or not (-):
++acl               -farsi             +mouse_sgr         +tag_binary
++arabic            +file_in_path      -mouse_sysmouse    -tag_old_static
++autocmd           +find_in_path      +mouse_urxvt       -tag_any_white
++autochdir         +float             +mouse_xterm       +tcl
+-autoservername    +folding           +multi_byte        +termguicolors
++balloon_eval      -footer            +multi_lang        +terminal
++balloon_eval_term +fork()            -mzscheme          +terminfo
++browse            +gettext           +netbeans_intg     +termresponse
+++builtin_terms    -hangul_input      +num64             +textobjects
++byte_offset       +iconv             +packages          +textprop
++channel           +insert_expand     +path_extra        +timers
++cindent           +ipv6              +perl              +title
++clientserver      +job               +persistent_undo   +toolbar
++clipboard         +jumplist          +popupwin          +user_commands
++cmdline_compl     +keymap            +postscript        +vartabs
++cmdline_hist      +lambda            +printer           +vertsplit
++cmdline_info      +langmap           +profile           +virtualedit
++comments          +libcall           -python            +visual
++conceal           +linebreak         +python3           +visualextra
++cryptv            +lispindent        +quickfix          +viminfo
++cscope            +listcmds          +reltime           +vreplace
++cursorbind        +localmap          +rightleft         +wildignore
++cursorshape       +lua               +ruby              +wildmenu
++dialog_con_gui    +menu              +scrollbind        +windows
++diff              +mksession         +signs             +writebackup
++digraphs          +modify_fname      +smartindent       +X11
++dnd               +mouse             +sound             -xfontset
+-ebcdic            +mouseshape        +spell             +xim
++emacs_tags        +mouse_dec         +startuptime       +xpm
++eval              +mouse_gpm         +statusline        +xsmp_interact
++ex_extra          -mouse_jsbterm     -sun_workshop      +xterm_clipboard
++extra_search      +mouse_netterm     +syntax            -xterm_save
+   system vimrc file: "$VIM/vimrc"
+     user vimrc file: "$HOME/.vimrc"
+ 2nd user vimrc file: "~/.vim/vimrc"
+      user exrc file: "$HOME/.exrc"
+  system gvimrc file: "$VIM/gvimrc"
+    user gvimrc file: "$HOME/.gvimrc"
+2nd user gvimrc file: "~/.vim/gvimrc"
+       defaults file: "$VIMRUNTIME/defaults.vim"
+    system menu file: "$VIMRUNTIME/menu.vim"
+  fall-back for $VIM: "/usr/share/vim"
+Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H -DFEAT_GUI_GTK  -pthread -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -Wdate-time  -g -O2 -fdebug-prefix-map=/build/vim-KZNIhZ/vim-8.2.1897=. -fstack-protector-strong -Wformat -Werror=format-security -D_REENTRANT -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1       
+Linking: gcc   -L. -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -fstack-protector -rdynamic -Wl,-export-dynamic -Wl,-E  -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -o vim   -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 -lSM -lICE -lXpm -lXt -lX11 -lXdmcp -lSM -lICE  -lm -ltinfo  -lselinux  -lcanberra -lacl -lattr -lgpm -ldl  -L/usr/lib -llua5.2 -Wl,-E  -fstack-protector-strong -L/usr/local/lib  -L/usr/lib/x86_64-linux-gnu/perl/5.26/CORE -lperl -ldl -lm -lpthread -lcrypt  -L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -lpython3.6m -lpthread -ldl -lutil -lm -L/usr/lib/x86_64-linux-gnu -ltcl8.6 -ldl -lz -lpthread -lm -lruby-2.5 -lpthread -lgmp -ldl -lcrypt -lm     
