@@ -20,6 +20,7 @@ set hlsearch			" highlight search string
 set splitright			" start new split on right
 
 set nocompatible		" be iMproved, required
+set whichwrap=<,>,[,]		" jump between lines
 filetype off			" required
 
 " set the runtime path to include Vundle and initialize
@@ -30,7 +31,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'		    " Plugin manager
 Plugin 'preservim/nerdtree'		    " Tree Explorer
 Plugin 'mbbill/undotree'		    " Showing undo tree
-" Plugin 'ctrlpvim/ctrlp.vim'		    " CtrlP file search.
 Plugin 'junegunn/fzf'			    " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'junegunn/fzf.vim'		    " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'rking/ag.vim'			    " For faster search
@@ -46,9 +46,6 @@ Plugin 'vim-airline/vim-airline-themes'	    " status bar themes
 call vundle#end()	    " required
 filetype plugin indent on   " required
 
-" jump between lines
-set whichwrap+=<,>,[,]
-
 " leader key
 let mapleader = " "
 
@@ -61,6 +58,18 @@ let g:ycm_show_diagnostics_ui = 0
 " toggle line numbers
 map <F2> :set nu!<CR>
 map <F4> :set rnu!<CR>
+map <F5> :!cscope -qR<CR>:cs reset<CR>
+map <F10> :e ~/.vimrc<CR>
+map <F12> :set whichwrap=<,>,[,]
+
+if filereadable("cscope.out")
+    :cs add cscope.out
+endif
+
+" copy to clipboard
+vmap <C-c> "+y
+" paste from clipboard
+map <C-p> "+p
 
 " maps for navigate between splits
 map <leader>w <C-w>w
@@ -81,11 +90,11 @@ nnoremap <silent> <leader>sR <C-w>R
 nnoremap <silent> <leader>sx <C-w>x
 
 " resize horizontal split
-nnoremap <silent> <leader>+ :resize +5<CR>
-nnoremap <silent> <leader>- :resize -5<CR>
+nnoremap <silent> <leader><leader>+ :resize +5<CR>
+nnoremap <silent> <leader><leader>- :resize -5<CR>
 " resize vertical split
-nnoremap <silent> <leader>v+ :vertical resize +5<CR>
-nnoremap <silent> <leader>v- :vertical resize -5<CR>
+nnoremap <silent> <leader>+ :vertical resize +5<CR>
+nnoremap <silent> <leader>- :vertical resize -5<CR>
 
 " show undo tree
 nnoremap <leader>u :UndotreeShow<CR>
@@ -171,46 +180,6 @@ let g:workspace_autosave = 0			" if too much file operation disable it
 let g:workspace_autosave_untrailspaces = 0
 let g:workspace_autosave_ignore = ['gitcommit']
 
-" CtrlP setting. Disabled.
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"   \ 'file': '\v\.(exe|so|dll|zip|gz|tar|bz2|o|d|out|swp)$',
-"   \ }
-" let g:netrw_browse_split=2
-" let g:netrw_banner=0
-" let g:netrw_winsize=25
-" 
-" " search in project root
-" map <F3> :CtrlP :pwd<CR>
-" 
-" " <C-p> starts nearest directory which has git folder
-" " :CtrlP <path> for starting search
-" " <C-\> to insert mode (w: currect word..)
-" " Press <c-f> and <c-b> to cycle between modes.
-" " Press <c-d> to switch to filename only search instead of full path.
-" " Press <c-r> to switch to regexp mode.
-" " Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
-" " Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
-" " Use <c-y> to create a new file and its parent directories.
-" " Use <c-z> to mark/unmark multiple files and <c-o> to open them.
-" 
-" let g:ctrlp_max_files=0
-" let g:ctrlp_max_depth=30
-" let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30'
-" let g:ctrlp_regexp = 1
-" 
-" if executable('ag')
-"   " Use ag over grep
-"   set grepprg=ag\ --nogroup\ --nocolor
-" 
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag -l -U --skip-vcs-ignores
-" 	      \ --ignore={*.zip,*.tar*,*.out,*.o,*.d,} --nocolor -g "" %s'
-" 
-"   " ag is fast enough that CtrlP doesn't need to cache
-"   let g:ctrlp_use_caching = 0
-" endif
-
 " FZF settings and shortcuts
 " :Files [PATH]		Files (runs $FZF_DEFAULT_COMMAND if defined)
 " :GFiles [OPTS]	Git files (git ls-files)
@@ -252,8 +221,6 @@ let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-w']
 
 " search in whole project
 map <F3> :Files<CR>
-" give path and search
-nmap <C-p> :Files
 
 " buffers list
 nmap <leader>bl :Buffers<CR>

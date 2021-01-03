@@ -5,7 +5,6 @@ This repository contains my vim configuration which has following plugins.
 |VundleVim/Vundle.vim|Plugin manager|
 |preservim/nerdtree|Tree Explorer|
 |mbbill/undotree|Showing undo tree|
-|ctrlpvim/ctrlp.vim|CtrlP file search|
 |junegunn/fzf|Fuzzy file, buffer, mru, tag, etc finder|
 |junegunn/fzf.vim|Fuzzy file, buffer, mru, tag, etc finder|
 |rking/ag.vim|For faster search|
