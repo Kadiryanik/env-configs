@@ -60,7 +60,7 @@ map <F2> :set nu!<CR>
 map <F4> :set rnu!<CR>
 map <F5> :!cscope -qR<CR>:cs reset<CR>
 map <F10> :e ~/.vimrc<CR>
-map <F12> :set whichwrap=<,>,[,]
+map <F12> :set whichwrap=<,>,[,]<CR>
 
 if filereadable("cscope.out")
     :cs add cscope.out
@@ -70,6 +70,16 @@ endif
 vmap <C-c> "+y
 " paste from clipboard
 map <C-p> "+p
+
+" indent profile default (with tab)
+map <leader>ipd :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+" indent profile 8 (with tab)
+map <leader>ip8 :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
+
+" indent profile space 2
+map <leader>ips2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
+" indent profile space 3
+map <leader>ips3 :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
 
 " maps for navigate between splits
 map <leader>w <C-w>w
