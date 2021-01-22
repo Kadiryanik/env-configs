@@ -3,7 +3,6 @@ syntax on
 " set nu			" set number
 " set rnu			" set relative number
 set noerrorbells		" disable bells
-" set expandtab			" use space charecter instead tab
 set tabstop=8			" real tab width
 set softtabstop=4		" visible tab width
 set shiftwidth=4		" tab width for smart indent
@@ -18,6 +17,7 @@ set vif=~/.vim/.viminfofile	" set viminfofile for marks
 set incsearch			" search while typing
 set hlsearch			" highlight search string
 set splitright			" start new split on right
+set hidden			" switch between buffers without saving
 
 set nocompatible		" be iMproved, required
 set whichwrap=<,>,[,]		" jump between lines
@@ -59,12 +59,22 @@ let g:ycm_show_diagnostics_ui = 0
 map <F2> :set nu!<CR>
 map <F4> :set rnu!<CR>
 map <F5> :!cscope -qR<CR>:cs reset<CR>
+map <F9> :set ignorecase!<CR>
 map <F10> :e ~/.vimrc<CR>
 map <F12> :set whichwrap=<,>,[,]<CR>
 
 if filereadable("cscope.out")
     :cs add cscope.out
 endif
+
+" terminal shortcuts
+" open new bash
+map <leader><leader>t :term bash<CR>
+map <leader><leader>T :vert term bash<CR>
+" switch normal mode
+tnoremap <C-n> <C-W>N
+" quit 
+tnoremap <C-x> <C-W>:bd!<CR>
 
 " copy to clipboard
 vmap <C-c> "+y
@@ -80,6 +90,8 @@ map <leader>ip8 :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 map <leader>ips2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
 " indent profile space 3
 map <leader>ips3 :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
+" indent profile space 8
+map <leader>ips8 :set expandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 
 " maps for navigate between splits
 map <leader>w <C-w>w
@@ -129,7 +141,7 @@ nmap <leader><leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " find functions calling this function
 nmap <leader><leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 " find this text string
-nmap <leader><leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+" nmap <leader><leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 " find this egrep pattern
 nmap <leader><leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 " find this file
