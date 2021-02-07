@@ -73,13 +73,20 @@ map <leader><leader>t :term bash<CR>
 map <leader><leader>T :vert term bash<CR>
 " switch normal mode
 tnoremap <C-n> <C-W>N
-" quit 
+" quit
 tnoremap <C-x> <C-W>:bd!<CR>
 
 " copy to clipboard
 vmap <C-c> "+y
 " paste from clipboard
 map <C-p> "+p
+
+" find selected 
+vnoremap <leader>f y/<C-R>"<CR>
+" replace selected 
+vnoremap <leader>rs y:%s/<C-R>"//gic
+" replace word 
+vnoremap <leader>rw y:%s/\<<C-R>"\>//gic
 
 " indent profile default (with tab)
 map <leader>ipd :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
@@ -90,6 +97,8 @@ map <leader>ip8 :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 map <leader>ips2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
 " indent profile space 3
 map <leader>ips3 :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
+" indent profile space 4
+map <leader>ips4 :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
 " indent profile space 8
 map <leader>ips8 :set expandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 
