@@ -75,7 +75,6 @@ map <leader><leader>T :vert term bash<CR>
 " switch terminal to normal mode
 tnoremap <C-n> <C-w>N
 " quit terminal split and bash
-map <C-x> :bd!<CR>
 tnoremap <C-x> <C-w>:bd!<CR>
 
 " copy to clipboard

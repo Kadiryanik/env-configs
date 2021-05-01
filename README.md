@@ -17,14 +17,14 @@ This repository contains my vim configuration which has following plugins.
 |vim-airline/vim-airline-themes|Status bar themes|
 
 ### Installation
-Type the following commands for installing the packages, copying and creating files/directories. 
+Type the following commands for installing the packages, copying and creating files/directories.
 ```sh
     $ cd vim-config
     $ ./install.sh
     $ vim --version
 ```
-Make sure the vim version is higher than **8**. You can check *vim-version.txt* file for my vim version. 
-Also there is a binary **vim** which installed by *ubuntu 18.04 x64*. 
+Make sure the vim version is higher than **8**. You can check *vim-version.txt* file for my vim version.
+Also there is a binary **vim** which installed by *ubuntu 18.04 x64*.
 You can get the latest version with following commands. Also you can get and compile latest version from source code of [vim](https://github.com/vim/vim).
 ```sh
     $ sudo add-apt-repository ppa:jonathonf/vim
@@ -35,4 +35,10 @@ Run vim and type following command for installing all plugins after vim setup is
     :PluginInstall
 ```
 After that you need to reopen vim, that's it. Your configuration is ready for use.
-You can check and modify **~/.vimrc** file for more details. 
+You can check and modify **~/.vimrc** file for more details.
+
+# Tmux Configuration
+### TODO: fill this section
+
+# Bash Configuration
+### TODO: fill this section
