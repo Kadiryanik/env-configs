@@ -122,19 +122,27 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 vimt() {
+    if [ $# -ne 1 ]; then
+	echo "Usage: ${FUNCNAME[0]} <ticket-name>"
+	return 1
+    fi
     mkdir -p ~/Documents/FixedIssues/$1
     vim ~/Documents/FixedIssues/$1/notes.md
 }
 
 vimj() {
+    if [ $# -ne 1 ]; then
+	echo "Usage: ${FUNCNAME[0]} <ticket-name>"
+	return 1
+    fi
     mkdir -p ~/Documents/FixedIssues/$1
     vim ~/Documents/FixedIssues/$1/notes.jira
 }
 
 tmuxt() {
-    if [ $# -lt 1 ]; then
-	echo "Usage: tmuxt <ticket-name>"
-	return -1
+    if [ $# -ne 1 ]; then
+	echo "Usage: ${FUNCNAME[0]} <ticket-name>"
+	return 1
     fi
     CUR_TICKET=$1
     tmux a -t $1 || tmux new -s $1 \; \

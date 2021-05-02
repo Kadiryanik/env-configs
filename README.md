@@ -1,5 +1,6 @@
-# Vim Configuration
-This repository contains my vim configuration which has following plugins.
+This repository contains my development environment configurations.
+
+## Vim Configuration
 | Plugin | Description |
 | ------ | ------ |
 |VundleVim/Vundle.vim|Plugin manager|
@@ -25,7 +26,7 @@ Type the following commands for installing the packages, copying and creating fi
 ```
 Make sure the vim version is higher than **8**. You can check *vim-version.txt* file for my vim version.
 Also there is a binary **vim** which installed by *ubuntu 18.04 x64*.
-You can get the latest version with following commands. Also you can get and compile latest version from source code of [vim](https://github.com/vim/vim).
+You can get the latest version with following commands. Also you can get and compile latest version from source code of [vim][vim-official].
 ```sh
     $ sudo add-apt-repository ppa:jonathonf/vim
     $ sudo apt-get update && sudo apt-get install vim
@@ -37,8 +38,29 @@ Run vim and type following command for installing all plugins after vim setup is
 After that you need to reopen vim, that's it. Your configuration is ready for use.
 You can check and modify **~/.vimrc** file for more details.
 
-# Tmux Configuration
-### TODO: fill this section
+## Tmux Configuration
+Some key binding in the [tmux.conf] file.
 
-# Bash Configuration
-### TODO: fill this section
+## Bash Configuration
+My bash config and some usefull functions in the [bashrc] file. And some other usefull installation in the [install.sh].
+
+| App | Description |
+| ------ | ------ |
+|[vim]|As text editor|
+|[cscope]|For browsing source code|
+|[fzf]|For reverse search (Ctrl-r)|
+|[tmux]|As terminal multiplexer|
+|[minicom]|As serial communicator|
+|[wireshark]|As network packet analyzer|
+
+
+ [vim-official]: <https://github.com/vim/vim>
+ [tmux.conf]: <https://github.com/Kadiryanik/env-configs/blob/master/tmux/.tmux.conf>
+ [bashrc]: <https://github.com/Kadiryanik/env-configs/blob/master/bash/.bashrc>
+ [install.sh]: <https://github.com/Kadiryanik/env-configs/blob/master/bash/install.sh>
+ [vim]: <https://github.com/Kadiryanik/env-configs#installation>
+ [cscope]: <http://cscope.sourceforge.net/>
+ [fzf]: <https://github.com/junegunn/fzf>
+ [tmux]: <https://github.com/tmux/tmux>
+ [minicom]: <https://wiki.emacinc.com/wiki/Getting_Started_With_Minicom>
+ [wireshark]: <https://www.wireshark.org/>
