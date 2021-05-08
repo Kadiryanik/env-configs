@@ -1,0 +1,18 @@
+[user]
+	name = Kadir YANIK
+	email = kdrynkk@gmail.com
+[alias]
+	c = commit
+	ca = commit --amend
+	cm = commit -m
+	d = diff
+	ds = diff --staged
+	s = status
+	su = status -uno
+	st = stash
+	sp = stash pop
+	pr = pull --rebase
+	sh = show
+	l = log
+	# rebase after fetch
+	fr = "!f() { [ $# -eq 1 ] && git checkout -b temp && git rebase temp $1 && git branch -d temp; }; f"
