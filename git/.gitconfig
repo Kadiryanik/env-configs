@@ -2,9 +2,13 @@
 	name = Kadir YANIK
 	email = kdrynkk@gmail.com
 [alias]
+	a = add
+	aa = add .
 	c = commit
 	ca = commit --amend
 	cm = commit -m
+	cp = cherry-pick
+	cpc = cherry-pick --continue
 	d = diff
 	ds = diff --staged
 	s = status
@@ -12,7 +16,9 @@
 	st = stash
 	sp = stash pop
 	pr = pull --rebase
+	rc = rebase --continue
 	sh = show
+	sh1 = show -1
 	l = log
-	# rebase after fetch
-	fr = "!f() { [ $# -eq 1 ] && git checkout -b temp && git rebase temp $1 && git branch -d temp; }; f"
+	l1 = log -1
+	l2 = log -2
