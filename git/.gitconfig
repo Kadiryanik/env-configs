@@ -2,8 +2,10 @@
 	name = Kadir YANIK
 	email = kdrynkk@gmail.com
 [alias]
+	bl = "!f() { if [[ \"$#\" -eq \"2\" ]]; then git blame -L $1 -- $2; else echo \"Usage: git bl <line-num-1>,<line-num-2> <file-name>\"; fi }; f"
 	a = add
 	aa = add .
+	b = blame --
 	c = commit
 	ca = commit --amend
 	cm = commit -m

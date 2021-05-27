@@ -147,10 +147,12 @@ tmuxt() {
 	return 1
     fi
     CUR_TICKET=$1
+    IPADDR_BYTE=$(if [[ "$(echo "${CUR_TICKET}" | awk '{print substr ($0, 1, 3)}')" == "RTS" ]]; \
+	then echo "111"; else echo "2"; fi)
     tmux a -t $1 || tmux new -s $1 \; \
 	send-keys 'sudo minicom -w -D /dev/ttyUSB0 -c on' C-m \; \
-	split-window -v \; \
+	split-window -v -p 40 \; \
 	send-keys "vimt $CUR_TICKET" C-m \; \
-	split-window -h \; \
-	send-keys 'sudo ifconfig eth0 192.168.2.200' C-m
+	split-window -h -p 30\; \
+	send-keys "sudo ifconfig eth0 192.168.$IPADDR_BYTE.200" C-m
 }
