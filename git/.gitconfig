@@ -3,6 +3,8 @@
 	email = kdrynkk@gmail.com
 [alias]
 	bl = "!f() { if [[ \"$#\" -eq \"2\" ]]; then git blame -L $1 -- $2; else echo \"Usage: git bl <line-num-1>,<line-num-2> <file-name>\"; fi }; f"
+	l = "!f() { git log -${1:-1}; }; f"
+	sh = "!f() { git show -${1:-1}; }; f"
 	a = add
 	aa = add .
 	b = blame --
@@ -19,8 +21,3 @@
 	sp = stash pop
 	pr = pull --rebase
 	rc = rebase --continue
-	sh = show
-	sh1 = show -1
-	l = log
-	l1 = log -1
-	l2 = log -2
