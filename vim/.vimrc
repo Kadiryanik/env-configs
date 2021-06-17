@@ -38,6 +38,7 @@ Plugin 'rking/ag.vim'			    " For faster search
 Plugin 'thaerkh/vim-workspace'		    " Manage sessions
 Plugin 'Valloric/YouCompleteMe'		    " Auto completer
 Plugin 'airblade/vim-gitgutter'		    " shows a git diff in the sign column
+Plugin 'preservim/tagbar'		    " shows tags for a current file
 " Plugin 'scrooloose/syntastic'		    " awesome syntax checker
 Plugin 'morhetz/gruvbox'		    " for colorscheme
 Plugin 'vim-airline/vim-airline'	    " status bar
@@ -68,6 +69,13 @@ map <F12> :set whichwrap=<,>,[,]<CR>
 if filereadable("cscope.out")
     :cs add cscope.out
 endif
+
+" open tagbar using mostly for FunctionList
+"     f: Jump to tagbar window when opening
+"     j: Jumpt to tagbar if already open
+"     c: close tagbar on tag selection
+map <F8> :TagbarOpen fjc<CR>
+map <leader>fl :TagbarOpen fjc<CR>
 
 " open new terminal
 map <leader><leader>t :term bash<CR>
