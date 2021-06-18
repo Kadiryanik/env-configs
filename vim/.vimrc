@@ -48,6 +48,15 @@ Plugin 'vim-airline/vim-airline-themes'	    " status bar themes
 call vundle#end()	    " required
 filetype plugin indent on   " required
 
+" FIX:
+"   https://stackoverflow.com/questions/64479087/vim-8-2-problems-with-unicode
+"   -> https://vi.stackexchange.com/questions/27399/whats-t-te-and-t-ti-added-by-vim-8/27400#27400
+"
+"   Printing charecter like that '[>4;m[>4;2m'
+"   Mostly caused by gitgutter and tagbar for me.
+set t_TI=
+set t_TE=
+
 " leader key
 let mapleader = " "
 
