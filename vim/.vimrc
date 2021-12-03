@@ -3,9 +3,10 @@ syntax on
 " set nu			" set number
 " set rnu			" set relative number
 set noerrorbells		" disable bells
+set noexpandtab			" noexpandtab
 set tabstop=8			" real tab width
-set softtabstop=4		" visible tab width
-set shiftwidth=4		" tab width for smart indent
+set softtabstop=8		" visible tab width
+set shiftwidth=8		" tab width for smart indent
 set smartindent			" smart indent when texting
 set nowrap			" no wrap the lines
 set smartcase			" case sensitive searching until put capital letter
@@ -29,20 +30,22 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'		    " Plugin manager
-Plugin 'preservim/nerdtree'		    " Tree Explorer
-Plugin 'mbbill/undotree'		    " Showing undo tree
-Plugin 'junegunn/fzf'			    " Fuzzy file, buffer, mru, tag, etc finder.
-Plugin 'junegunn/fzf.vim'		    " Fuzzy file, buffer, mru, tag, etc finder.
-Plugin 'rking/ag.vim'			    " For faster search
-Plugin 'thaerkh/vim-workspace'		    " Manage sessions
-Plugin 'Valloric/YouCompleteMe'		    " Auto completer
-Plugin 'airblade/vim-gitgutter'		    " shows a git diff in the sign column
-Plugin 'preservim/tagbar'		    " shows tags for a current file
-" Plugin 'scrooloose/syntastic'		    " awesome syntax checker
-Plugin 'morhetz/gruvbox'		    " for colorscheme
-Plugin 'vim-airline/vim-airline'	    " status bar
-Plugin 'vim-airline/vim-airline-themes'	    " status bar themes
+Plugin 'VundleVim/Vundle.vim'			" Plugin manager
+Plugin 'preservim/nerdtree'			" Tree Explorer
+Plugin 'mbbill/undotree'			" Showing undo tree
+Plugin 'junegunn/fzf'				" Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'junegunn/fzf.vim'			" Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'rking/ag.vim'				" For faster search
+Plugin 'thaerkh/vim-workspace'			" Manage sessions
+" Plugin 'Valloric/YouCompleteMe'		" Auto completer
+Plugin 'vim-scripts/AutoComplPop'		" Auto completer
+Plugin 'airblade/vim-gitgutter'			" shows a git diff in the sign column
+Plugin 'preservim/tagbar'			" shows tags for a current file
+" Plugin 'scrooloose/syntastic'			" awesome syntax checker
+Plugin 'morhetz/gruvbox'			" for colorscheme
+Plugin 'vim-airline/vim-airline'		" status bar
+Plugin 'vim-airline/vim-airline-themes'		" status bar themes
+Plugin 'zivyangll/git-blame.vim'		" git blame
 
 "Plugin 'tpope/vim-fugitive'
 call vundle#end()	    " required
@@ -56,6 +59,11 @@ filetype plugin indent on   " required
 "   Mostly caused by gitgutter and tagbar for me.
 set t_TI=
 set t_TE=
+
+" AutoComplPop options
+set complete=.,b,u,t,d,i	" check help for details
+set completeopt=menuone,longest	" show select list when there is only one item
+set shortmess+=c		" Do not show selection in status bar
 
 " leader key
 let mapleader = " "
@@ -156,7 +164,7 @@ nnoremap <leader>u :UndotreeShow<CR>
 " nmap <silent> <leader>gb <C-t>
 
 " go references
-nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
+" nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 
 " CSCOPE shortcuts. Creating cscope file: cscope -q -R
 " find this C symbol
@@ -182,6 +190,9 @@ nmap <leader><leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
 nmap <leader>bp :bp<CR>
 nmap <leader>bn :bn<CR>
 nmap <leader>bd :bd<CR>
+
+" git blame
+nnoremap <Leader><leader>b :<C-u>call gitblame#echo()<CR>
 
 " nerdTree maps
 nnoremap <silent> <leader>t :NERDTreeToggle<CR>
@@ -344,6 +355,7 @@ let g:airline#extensions#tabline#show_buffers = 0	" dont show buffers in the tab
 let g:airline#extensions#tabline#show_splits = 0	" disables the buffer name that displays on the right of the tabline
 let g:airline#extensions#tabline#show_tab_type = 0	" disables the weird ornage arrow on the tabline
 let g:airline#extensions#whitespace#checks = [ ]	" [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%p%%', 'colnr', 'linenr', 'maxlinenr'])
 
 " save and load folding texts
 autocmd BufWinLeave *.* mkview

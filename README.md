@@ -10,12 +10,13 @@ This repository contains my development environment configurations.
 |junegunn/fzf.vim|Fuzzy file, buffer, mru, tag, etc finder|
 |rking/ag.vim|For faster search|
 |thaerkh/vim-workspace|Manage sessions|
-|Valloric/YouCompleteMe|Auto completer|
+|vim-scripts/AutoComplPop|Auto completer|
 |airblade/vim-gitgutter|Shows a git diff in the sign column|
-|scrooloose/syntastic|Awesome syntax checker|
+|preservim/tagbar|Show tags in current file|
 |morhetz/gruvbox|For colorscheme|
 |vim-airline/vim-airline|Status bar|
 |vim-airline/vim-airline-themes|Status bar themes|
+|zivyangll/git-blame.vim|Show git blame in status bar|
 
 ### Installation
 Type the following commands for installing the packages, copying and creating files/directories.
