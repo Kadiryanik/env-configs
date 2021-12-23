@@ -120,6 +120,15 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# cd-ticket-dir
+cdt() {
+    if [ $# -ne 1 ]; then
+	echo "Usage: ${FUNCNAME[0]} <ticket-name>"
+	return 1
+    fi
+    mkdir -p ~/Documents/FixedIssues/$1
+    cd ~/Documents/FixedIssues/$1
+}
 # vim-ticket
 vimt() {
     if [ $# -ne 1 ]; then
