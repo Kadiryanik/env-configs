@@ -17,6 +17,7 @@ This repository contains my development environment configurations.
 |vim-airline/vim-airline|Status bar|
 |vim-airline/vim-airline-themes|Status bar themes|
 |zivyangll/git-blame.vim|Show git blame in status bar|
+|Kadiryanik/cs-in-qf.vim|Show cscope in quickfix|
 
 ### Installation
 Type the following commands for installing the packages, copying and creating files/directories.

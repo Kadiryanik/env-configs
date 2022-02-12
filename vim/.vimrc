@@ -46,6 +46,7 @@ Plugin 'morhetz/gruvbox'			" for colorscheme
 Plugin 'vim-airline/vim-airline'		" status bar
 Plugin 'vim-airline/vim-airline-themes'		" status bar themes
 Plugin 'zivyangll/git-blame.vim'		" git blame
+Plugin 'Kadiryanik/cs-in-qf.vim'		" cscope in quickfix
 
 "Plugin 'tpope/vim-fugitive'
 call vundle#end()	    " required
@@ -166,25 +167,30 @@ nnoremap <leader>u :UndotreeShow<CR>
 " go references
 " nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 
-" CSCOPE shortcuts. Creating cscope file: cscope -q -R
+" quickfix
+nnoremap <silent> <C-j> :cprevious<CR>
+nnoremap <silent> <C-n> :cnext<CR>
+nnoremap <silent> <C-q> :ToggleQF<CR>
+
+" cscope shortcuts.
 " find this C symbol
-nmap <leader><leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><leader>s :Qcs s<CR>
 " find this definition
-nmap <leader><leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><leader>g :Qcs g<CR>
 " find functions called by this function
-nmap <leader><leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><leader>d :Qcs d<CR>
 " find functions calling this function
-nmap <leader><leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><leader>c :Qcs c<CR>
 " find this text string
-" nmap <leader><leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+" nmap <leader><leader>t :Qcs t<CR>
 " find this egrep pattern
-nmap <leader><leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><leader>e :Qcs e<CR>
 " find this file
-nmap <leader><leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader><leader>f :Qcs f<CR>
 " find files #including this file
-nmap <leader><leader>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <leader><leader>i :Qcs i<CR>
 " find places where this symbol is assigned a value
-nmap <leader><leader>a :cs find a <C-R>=expand("<cword>")<CR><CR>
+nmap <leader><leader>a :Qcs a<CR>
 
 " buffer shortcuts
 nmap <leader>bp :bp<CR>
