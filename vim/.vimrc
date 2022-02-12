@@ -67,6 +67,7 @@ set completeopt=menuone,longest	" show select list when there is only one item
 set shortmess+=c		" Do not show selection in status bar
 
 " leader key
+nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 " Easy jump for marks
@@ -96,8 +97,8 @@ map <F8> :TagbarOpen fjc<CR>
 map <leader>fl :TagbarOpen fjc<CR>
 
 " open new terminal
-map <leader><leader>t :term bash<CR>
-map <leader><leader>T :vert term bash<CR>
+nmap <leader><leader>t :term bash<CR>
+nmap <leader><leader>T :vert term bash<CR>
 " switch terminal to normal mode
 tnoremap <C-n> <C-w>N
 " quit terminal split and bash
@@ -106,7 +107,7 @@ tnoremap <C-x> <C-w>:bd!<CR>
 " copy to clipboard
 vmap <C-c> "+y
 " paste from clipboard
-map <C-p> "+p
+nmap <C-p> "+p
 
 " find selected
 vnoremap <leader>f y/<C-R>"<CR>
@@ -116,25 +117,25 @@ vnoremap <leader>rs y:%s/<C-R>"//gic
 vnoremap <leader>rw y:%s/\<<C-R>"\>//gic
 
 " indent profile default (with tab)
-map <leader>ipd :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nmap <leader>ipd :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
 " indent profile 8 (with tab)
-map <leader>ip8 :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
+nmap <leader>ip8 :set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 
 " indent profile space 2
-map <leader>ips2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
+nmap <leader>ips2 :set expandtab tabstop=2 softtabstop=2 shiftwidth=2<CR>
 " indent profile space 3
-map <leader>ips3 :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
+nmap <leader>ips3 :set expandtab tabstop=3 softtabstop=3 shiftwidth=3<CR>
 " indent profile space 4
-map <leader>ips4 :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
+nmap <leader>ips4 :set expandtab tabstop=4 softtabstop=4 shiftwidth=4<CR>
 " indent profile space 8
-map <leader>ips8 :set expandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
+nmap <leader>ips8 :set expandtab tabstop=8 softtabstop=8 shiftwidth=8<CR>
 
 " maps for navigate between splits
-map <leader>w <C-w>w
-map <leader>h <C-w>h
-map <leader>j <C-w>j
-map <leader>k <C-w>k
-map <leader>l <C-w>l
+nnoremap <leader>w <C-w>w
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
 
 " no highlight
 nnoremap <silent> <leader>nh :nohl<CR>
@@ -206,9 +207,9 @@ nnoremap <silent> <leader>gf :NERDTreeFind<CR>
 
 " vim-workspace gives error when nerd tree left open in session
 " so close it and quit all for successfully session restore
-nnoremap <silent> <leader>qa :NERDTreeClose<CR> :qa!<CR>
-nnoremap <silent> <leader>qw :NERDTreeClose<CR> :wqa<CR>
-nnoremap <silent> <leader>qq :NERDTreeClose<CR> :qa<CR>
+nnoremap <silent> <leader>qa :NERDTreeClose<CR>:qa!<CR>
+nnoremap <silent> <leader>qw :NERDTreeClose<CR>:wqa<CR>
+nnoremap <silent> <leader>qq :NERDTreeClose<CR>:qa<CR>
 
 " move page up and down one line keep cursor same in line
 map <C-Up> <C-Y>
@@ -231,7 +232,7 @@ nnoremap <Tab> gt	" switch the next tab
 nnoremap <S-Tab> gT	" switch the prev tab
 
 " move current split to tab
-map <leader>st <C-w>T
+nnoremap <leader>st <C-w>T
 
 " highlight, delete, hide trailing charecters
 nmap <silent> <leader>WSE :highlight ExtraWhitespace ctermbg=red guibg=red<CR>:match ExtraWhitespace /\s\+$/<CR>
