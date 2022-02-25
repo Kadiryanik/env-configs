@@ -40,6 +40,7 @@ Plugin 'thaerkh/vim-workspace'			" Manage sessions
 " Plugin 'Valloric/YouCompleteMe'		" Auto completer
 Plugin 'vim-scripts/AutoComplPop'		" Auto completer
 Plugin 'airblade/vim-gitgutter'			" shows a git diff in the sign column
+Plugin 'tpope/vim-fugitive'			" plugin for git
 Plugin 'preservim/tagbar'			" shows tags for a current file
 " Plugin 'scrooloose/syntastic'			" awesome syntax checker
 Plugin 'morhetz/gruvbox'			" for colorscheme
@@ -48,7 +49,6 @@ Plugin 'vim-airline/vim-airline-themes'		" status bar themes
 Plugin 'zivyangll/git-blame.vim'		" git blame
 Plugin 'Kadiryanik/cs-in-qf.vim'		" cscope in quickfix
 
-"Plugin 'tpope/vim-fugitive'
 call vundle#end()	    " required
 filetype plugin indent on   " required
 
@@ -107,7 +107,7 @@ tnoremap <C-x> <C-w>:bd!<CR>
 " copy to clipboard
 vmap <C-c> "+y
 " paste from clipboard
-nmap <C-p> "+p
+map <C-p> "+p
 
 " find selected
 vnoremap <leader>f y/<C-R>"<CR>
@@ -173,6 +173,9 @@ nnoremap <silent> <C-j> :cprevious<CR>
 nnoremap <silent> <C-n> :cnext<CR>
 nnoremap <silent> <C-q> :ToggleQF<CR>
 
+" cs-in-qf settings
+let g:cs_qf_force_open=0
+
 " cscope shortcuts.
 " find this C symbol
 nmap <leader><leader>s :Qcs s<CR>
@@ -228,8 +231,10 @@ imap <C-S-Down> <ESC> :move +1<CR>=0i
 " managing tabs
 nmap <leader>nt :tabnew<CR>
 nmap <leader>ct :tabclose<CR>
-nnoremap <Tab> gt	" switch the next tab
-nnoremap <S-Tab> gT	" switch the prev tab
+" switch the next tab
+nnoremap <Tab> gT
+" switch the prev tab
+nnoremap <S-Tab> gT
 
 " move current split to tab
 nnoremap <leader>st <C-w>T
@@ -339,11 +344,26 @@ nmap <leader>ff :Ag -U -w -s <C-R><C-A>
 highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
-nmap ) :GitGutterNextHunk <CR>
-nmap ( :GitGutterPrevHunk <CR>
+nmap ) :GitGutterNextHunk<CR>
+nmap ( :GitGutterPrevHunk<CR>
 let g:gitgutter_map_keys = 0
 " toggle highlighting
-nmap <leader>gh :GitGutterLineHighlightsToggle <CR>
+nmap <leader>gh :GitGutterLineHighlightsToggle<CR>
+
+" vim-fugitive mappings
+nmap <leader>gs :Git<CR>
+nmap <leader>gl :Git log<CR>
+nmap <leader>gb :Git blame<CR>
+nmap <leader>gm :Git mergetool<CR>
+" shows only unstaged changes
+nmap <leader>gd :Gvdiffsplit<CR>
+nmap <leader>gt :Git difftool<CR>
+" shows also staged changes
+nmap <leader>ggd :Gvdiffsplit HEAD<CR>
+nmap <leader>ggt :Git difftool HEAD<CR>
+" jump prev-next in Gvdiff
+nmap <A-Left> [c
+nmap <A-Right> ]c
 
 " colorscheme settings
 colorscheme gruvbox

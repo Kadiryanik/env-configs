@@ -129,6 +129,13 @@ cdt() {
     mkdir -p ~/Documents/FixedIssues/$1
     cd ~/Documents/FixedIssues/$1
 }
+
+# cd and open vim
+cdv() {
+    cd -P $1
+    vim
+}
+
 # vim-ticket
 vimt() {
     if [ $# -ne 1 ]; then
@@ -136,7 +143,8 @@ vimt() {
 	return 1
     fi
     mkdir -p ~/Documents/FixedIssues/$1
-    vim ~/Documents/FixedIssues/$1/notes.md
+    cd ~/Documents/FixedIssues/$1
+    vim notes.md
 }
 
 # vim-jira
@@ -146,7 +154,8 @@ vimj() {
 	return 1
     fi
     mkdir -p ~/Documents/FixedIssues/$1
-    vim ~/Documents/FixedIssues/$1/notes.jira
+    cd ~/Documents/FixedIssues/$1
+    vim notes.jira
 }
 
 # tmux-ticket

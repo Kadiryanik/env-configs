@@ -12,6 +12,7 @@ This repository contains my development environment configurations.
 |thaerkh/vim-workspace|Manage sessions|
 |vim-scripts/AutoComplPop|Auto completer|
 |airblade/vim-gitgutter|Shows a git diff in the sign column|
+|tpope/vim-fugitive|Premier vim plugin for git|
 |preservim/tagbar|Show tags in current file|
 |morhetz/gruvbox|For colorscheme|
 |vim-airline/vim-airline|Status bar|
