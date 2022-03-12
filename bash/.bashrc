@@ -58,8 +58,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+get_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1) /'
+}
+
 if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\W \[\033[01;36m\]'$'\u2192 '' \[\033[00m\]'
+    PS1="${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\W \[\033[01;30m\]\$(get_git_branch)\[\033[01;36m\]"$'\u2192  \[\033[00m\]'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi

@@ -232,9 +232,14 @@ imap <C-S-Down> <ESC> :move +1<CR>=0i
 nmap <leader>nt :tabnew<CR>
 nmap <leader>ct :tabclose<CR>
 " switch the next tab
-nnoremap <Tab> gT
+" FIXME nnoremap <Tab> gT -- it blocks <C-i>
 " switch the prev tab
 nnoremap <S-Tab> gT
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
 
 " move current split to tab
 nnoremap <leader>st <C-w>T
