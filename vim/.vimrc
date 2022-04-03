@@ -169,6 +169,8 @@ nnoremap <leader>u :UndotreeShow<CR>
 " nmap <silent> <leader>gr :YcmCompleter GoToReferences<CR>
 
 " quickfix
+nnoremap <leader><leader>o :colder<CR>
+nnoremap <leader><leader>n :cnewer<CR>
 nnoremap <silent> <C-j> :cprevious<CR>
 nnoremap <silent> <C-n> :cnext<CR>
 nnoremap <silent> <C-q> :ToggleQF<CR>
@@ -390,7 +392,7 @@ let g:airline#extensions#whitespace#checks = [ ]	" [ 'indent', 'trailing', 'long
 let g:airline_section_z = airline#section#create(['windowswap', 'obsession', '%p%%', 'colnr', 'linenr', 'maxlinenr'])
 
 " save and load folding texts
-autocmd BufWinLeave *.* mkview
+autocmd BufWinLeave *.* mkview!
 autocmd BufWinEnter *.* silent loadview
 
 " Usefull tips
