@@ -23,7 +23,7 @@ This repository contains my development environment configurations.
 ### Installation
 Type the following commands for installing the packages, copying and creating files/directories.
 ```sh
-    $ cd vim-config
+    $ cd env-configs/vim
     $ ./install.sh
     $ vim --version
 ```
