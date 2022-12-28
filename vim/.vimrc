@@ -93,7 +93,7 @@ endif
 "     f: Jump to tagbar window when opening
 "     j: Jumpt to tagbar if already open
 "     c: close tagbar on tag selection
-map <F8> :TagbarOpen fjc<CR>
+map <F7> :TagbarOpen fj<CR>
 map <leader>fl :TagbarOpen fjc<CR>
 
 " open new terminal
@@ -371,6 +371,13 @@ nmap <leader>ggt :Git difftool HEAD<CR>
 " jump prev-next in Gvdiff
 nmap <A-Left> [c
 nmap <A-Right> ]c
+
+" folds/folding
+" jump and open next/prev fold and close last one, move current line to top of screen
+nnoremap <leader>zz zkzx[zzt
+nnoremap <leader>zx zjzxzt
+" finds lines beggining with } and folds between {}
+nnoremap <leader>zf :%g/^}/normal! zf%<CR>gg
 
 " colorscheme settings
 colorscheme gruvbox
