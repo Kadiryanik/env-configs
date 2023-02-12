@@ -23,3 +23,10 @@ sudo apt-get install unity-tweak-tool	# tweak tool for workspace switcher with h
 sudo apt-get install htop		# monitoring
 sudo apt-get install tmux		# terminal multiplexer
 
+# install translate-shell
+sudo apt-get install gawk		# to compile
+git clone https://github.com/soimort/translate-shell.git
+(cd translate-shell && make && sudo make install)
+
+# will use in the scripts/update-translate-hit.pl
+touch ~/Documents/translate.md

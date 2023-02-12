@@ -23,6 +23,7 @@ set hidden			" switch between buffers without saving
 set nocompatible		" be iMproved, required
 set whichwrap=<,>,[,]		" jump between lines
 set ttimeoutlen=0		" ESC response timeout
+set backspace=indent,eol,start	" fix local build backspace issue
 filetype off			" required
 
 " set the runtime path to include Vundle and initialize

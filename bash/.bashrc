@@ -178,3 +178,27 @@ tmuxt() {
 	split-window -h -p 30\; \
 	send-keys "sudo ifconfig eth0 192.168.$IPADDR_BYTE.200" C-m
 }
+
+# en -> tr
+t() {
+    if [ $# -ne 1 ]; then
+	echo "Usage: ${FUNCNAME[0]} <word>"
+	return 1
+    fi
+    trans -d -e google -s en -t tr "$1"
+    echo "#####"
+    result=`trans -b -e google -s en -t tr "$1"`
+    echo -e "\033[01;32m$result\033[0m"
+    perl ~/github/env-configs/scripts/update-translate-hit.pl ~/Documents/translate.md "$1" "$result"
+}
+
+# tr -> en
+c() {
+    if [ $# -ne 1 ]; then
+	echo "Usage: ${FUNCNAME[0]} <word>"
+	return 1
+    fi
+    result=`trans -b -e google -s tr -t en "$1"`
+    echo -e "\033[01;32m$result\033[0m"
+    perl ~/github/env-configs/scripts/update-translate-hit.pl ~/Documents/translate.md "$1" "$result"
+}
